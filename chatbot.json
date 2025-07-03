@@ -1,0 +1,104 @@
+{
+  "name": "chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "d73f8f21-be5a-4057-b6f6-e1ad3b728062",
+      "name": "When chat message received",
+      "webhookId": "72ca9797-5743-48a1-a570-a57a1fdb450d"
+    },
+    {
+      "parameters": {
+        "resource": "assistant",
+        "assistantId": {
+          "__rl": true,
+          "value": "asst_3pRNHq2XMdsMbS7X985K2QMF",
+          "mode": "list",
+          "cachedResultName": "nate"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        440,
+        0
+      ],
+      "id": "8f5ee218-4aa3-4a20-a7f9-23d839014b01",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "Q92JZK0HuEckcgnQ",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9cdb9913-1e98-4569-812b-abcfbcb3d6ac",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        800,
+        0
+      ],
+      "id": "f71175c8-c0d2-46e2-a500-5df10c848811",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8d8ce84d-eb8e-47b3-b2ce-2ec59e6861dc",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e2689d78b9e5cecf9181acc84b8ce173ba15da69bbc4887e42c7ac65875dbd95"
+  },
+  "id": "UyuV30Jtlfwu0K1B",
+  "tags": []
+}
